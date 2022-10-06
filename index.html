@@ -27,6 +27,9 @@
                     $.get("https://api.github.com/users/"+ $("#usr").val()+"/repos" , function(data, status){
                             for( var i=0; i< data.length;i++) {
                                 var item = data[i]
+                                if (item.description==null){
+                                    item.description = " ";
+                                }
                                 $("#tabla").append("<tr><td>" + item.name + "</td><td>" + item.stargazers_count + "</td><td>" + item.description + "</td></tr>");
                             }
                         }
