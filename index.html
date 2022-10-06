@@ -17,6 +17,10 @@
                         $("#seguidores").text(data.followers)
                         $("#repositorios").text(data.public_repos)
                         $("#informacion").text(data.url)
+                        //$("#a").text(data.avatar_url)
+                        // $("#imgPerfil").html('img src="text(data.avatar_url)"')
+                        url = data.avatar_url;
+                        $("#imgPerfil").html('<img src="'+url+'">');
                     },"json");
                 });
                 $("button").click(function(){
@@ -55,14 +59,18 @@
                         <th><div style= "background-color:#F8EF64; text-align: center">Nº Seguidores</div></th>
                         <th><div style= "background-color:#93F864; text-align: center">Nº Repositorios</div></th>
                         <th><div style= "background-color:#64B5F8; text-align: center">URL del perfil</div></th>
+                        <th><div style="background-color: blueviolet; text-align: center">Foto Avatar</div></th>
                     </tr>
                 </thead>
                 <tbody>
+
                     <tr>
                         <td id ="nombreUsuario"></td>
+                       <!-- <td>HOla</td>-->
                         <td id ="seguidores"></td>
                         <td id ="repositorios"></td>
                         <td id ="informacion"></td>
+                        <td id ="imgPerfil"></td>
                     </tr>
                 </tbody>
 
