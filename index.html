@@ -7,19 +7,25 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <script>
             $(document).ready(function(){
                 $("button").click(function(){
                     $.get("https://api.github.com/users/"+ $("#usr").val() , function(data, status){
+                        url = data.avatar_url;
+                        $("#avatar").html('<img src = "'+url+'">');
                         $("#nombreUsuario").text(data.login)
                         $("#seguidores").text(data.followers)
                         $("#repositorios").text(data.public_repos)
                         $("#informacion").text(data.url)
+
+
+
                     },"json");
                 });
             });
+
         </script>
     </head>
     <body>
@@ -35,12 +41,13 @@
                     <input type="text" name="usr" id="usr">
                 </div>
             </form>
-            <button type="button" class="btn" value="Pulsame" onclick="pulsar()">
+            <button type="button" class="btn" value="Pulsame">
                 <span class="glyphicon glyphicon-search"></span> Buscar
             </button>
             <table class="table">
                 <thead>
                     <tr>
+                        <th><div style= "background-color:#F5B7B1; text-align: center">Avatar</div></th>
                         <th><div style= "background-color:#F86664; text-align: center">Nombre de Usuario</div></th>
                         <th><div style= "background-color:#F8EF64; text-align: center">Nº Seguidores</div></th>
                         <th><div style= "background-color:#93F864; text-align: center">Nº Repositorios</div></th>
@@ -49,6 +56,7 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td id ="avatar"></td>
                         <td id ="nombreUsuario"></td>
                         <td id ="seguidores"></td>
                         <td id ="repositorios"></td>
