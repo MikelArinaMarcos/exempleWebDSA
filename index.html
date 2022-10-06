@@ -13,17 +13,32 @@
             $(document).ready(function(){
                 $("button").click(function(){
                     $.get("https://api.github.com/users/"+ $("#usr").val() , function(data, status){
-                        url = data.avatar_url;
-                        $("#avatar").html('<img src = "'+url+'">');
                         $("#nombreUsuario").text(data.login)
                         $("#seguidores").text(data.followers)
                         $("#repositorios").text(data.public_repos)
                         $("#informacion").text(data.url)
 
-
+                        //$("#a").text(data.avatar_url)
+                        // $("#imgPerfil").html('img src="text(data.avatar_url)"')
+                        url = data.avatar_url;
+                        $("#imgPerfil").html('<img src="'+url+'">');
 
                     },"json");
                 });
+                $("button").click(function(){
+                    $.get("https://api.github.com/users/"+ $("#usr").val()+"/repos" , function(data, status){
+                            for( var i=0; i< data.length;i++)
+                            { var item = data[i]
+                                if(item.description==null){
+                                    item.description = " ";
+                                }
+                                $("#tabla").append("<tr><td>"+item.name+"</td><td>"+item.stargazers_count+"</td><td>"+item.description+"</td></tr>");
+
+                            }
+                        }
+                        ,"json");
+                });
+
             });
 
         </script>
@@ -47,23 +62,44 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th><div style= "background-color:#F5B7B1; text-align: center">Avatar</div></th>
+
                         <th><div style= "background-color:#F86664; text-align: center">Nombre de Usuario</div></th>
                         <th><div style= "background-color:#F8EF64; text-align: center">Nº Seguidores</div></th>
                         <th><div style= "background-color:#93F864; text-align: center">Nº Repositorios</div></th>
                         <th><div style= "background-color:#64B5F8; text-align: center">URL del perfil</div></th>
+                        <th><div style="background-color: blueviolet; text-align: center">Foto Avatar</div></th>
                     </tr>
                 </thead>
                 <tbody>
+
                     <tr>
-                        <td id ="avatar"></td>
+
                         <td id ="nombreUsuario"></td>
+                       <!-- <td>HOla</td>-->
                         <td id ="seguidores"></td>
                         <td id ="repositorios"></td>
                         <td id ="informacion"></td>
+                        <td id ="imgPerfil"></td>
                     </tr>
                 </tbody>
+
             </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><div style= "background-color:#FC682D; text-align: center">Nombre</div></th>
+                        <th><div style= "background-color:#DAF7A6; text-align: center">Seguidores</div></th>
+                        <th><div style= "background-color:#F72FD6; text-align: center">Descripción</div></th>
+            </tr>
+            </thead>
+            <tbody id="tabla">
+            <tr>
+                <td id ="username" style= "text-align: center"></td>
+                <td id ="follow" style="text-align: center"></td>
+                <td id ="repos" style="text-align: center"></td>
+            </tr>
+            </tbody>
+        </table>
         </div>
     </body>
 </html>
