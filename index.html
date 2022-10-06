@@ -19,7 +19,17 @@
                         $("#informacion").text(data.url)
                     },"json");
                 });
+                $("button").click(function(){
+                    $.get("https://api.github.com/users/"+ $("#usr").val()+"/repos" , function(data, status){
+                            for( var i=0; i< data.length;i++)
+                            { var item = data[i]
+                                $("#tabla").append("<tr><td>"+item.name+"</td><td>"+item.stargazers_count+"</td><td>"+item.description+"</td></tr>");
+                            }
+                        }
+                        ,"json");
+                });
             });
+
         </script>
     </head>
     <body>
@@ -55,7 +65,24 @@
                         <td id ="informacion"></td>
                     </tr>
                 </tbody>
+
             </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><div style= "background-color:#FC682D; text-align: center">Nombre</div></th>
+                        <th><div style= "background-color:#DAF7A6; text-align: center">Seguidores</div></th>
+                        <th><div style= "background-color:#F72FD6; text-align: center">Descripción</div></th>
+            </tr>
+            </thead>
+            <tbody id="tabla">
+            <tr>
+                <td id ="username" style= "text-align: center"></td>
+                <td id ="follow" style="text-align: center"></td>
+                <td id ="repos" style="text-align: center"></td>
+            </tr>
+            </tbody>
+        </table>
         </div>
     </body>
 </html>
